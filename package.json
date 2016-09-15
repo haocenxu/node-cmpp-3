@@ -4,6 +4,7 @@
   "description": "",
   "main": "client.js",
   "scripts": {
+	"compile": "node ./node_modules/typescript/bin/tsc index.ts && node ./node_modules/typescript/bin/tsc config.ts",
     "test": "mocha *.spec.js"
   },
   "author": "",
@@ -17,6 +18,7 @@
     "bluebird": "^2.9.14",
     "iconv-lite": "0.4.7",
     "lodash": "^3.5.0",
-    "moment": "^2.9.0"
+    "moment": "^2.9.0",
+    "typescript": "^1.8.10"
   }
 }
