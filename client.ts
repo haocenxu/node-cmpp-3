@@ -4,9 +4,7 @@
 
 require("./global");
 import Socket = require("./cmppSocket");
-import crypto = require('crypto');
 import events = require("events");
-var md5 = crypto.createHash('md5');
 import cmdCfg = require("./commandsConfig");
 
 class Client extends events.EventEmitter {
@@ -89,14 +87,14 @@ class Client extends events.EventEmitter {
 			return this.sendLongSms(body, content);
 		}
 
-		var buf = new Buffer(content, "gbk");
+		var buf = new Buffer(content, "utf8");
 		body.Msg_Length=buf.length;
 		body.Msg_Content=buf;
 		return this.socket.send(cmdCfg.Commands.CMPP_SUBMIT, body);
 	}
 
 	private sendLongSms(body:Body, content):Promise<any>{
-		var buf = new Buffer(content,"utf16");
+		var buf = new Buffer(content,"ucs2");
 
 		var bufSliceCount = this.longSmsBufLimit - 8;
 
@@ -170,8 +168,7 @@ class Client extends events.EventEmitter {
 		buffer.write(spId,0,6,"ascii");
 		buffer.write(secret,15,21,"ascii");
 		buffer.write(this.getTimestamp(),21,10,"ascii");
-		md5.update(buffer);
-		return md5.digest();
+		return require('crypto').createHash('md5').update(buffer).digest();
 	}
 
 	getTimestamp(){
