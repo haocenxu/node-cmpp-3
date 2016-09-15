@@ -87,7 +87,7 @@ class Client extends events.EventEmitter {
 			return this.sendLongSms(body, content);
 		}
 
-		var buf = new Buffer(content, "utf8");
+		var buf = new Buffer(content, "ucs2");
 		body.Msg_Length=buf.length;
 		body.Msg_Content=buf;
 		return this.socket.send(cmdCfg.Commands.CMPP_SUBMIT, body);
@@ -140,7 +140,7 @@ class Client extends events.EventEmitter {
 			Fee_terminal_type:1,
 			TP_pId:0,
 			TP_udhi:0,
-			Msg_Fmt:15,
+			Msg_Fmt:8,
 			Msg_src:this.spId,
 			FeeType:"03",
 			FeeCode:this.config.feeCode,
