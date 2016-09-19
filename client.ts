@@ -142,7 +142,7 @@ class Client extends events.EventEmitter {
 			TP_udhi:0,
 			Msg_Fmt:8,
 			Msg_src:this.spId,
-			FeeType:"03",
+			FeeType:"01",
 			FeeCode:this.config.feeCode,
 			ValId_Time:"",
 			At_Time:"",
